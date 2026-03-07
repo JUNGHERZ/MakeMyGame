@@ -27,7 +27,7 @@ def load_env(path='.env'):
 
 load_env()
 
-PORT = 8777
+PORT = int(os.environ.get('PORT', 8777))
 STATIC_DIR = os.path.dirname(os.path.abspath(__file__))
 GAMES_DIR = os.path.join(STATIC_DIR, 'shared_games')
 os.makedirs(GAMES_DIR, exist_ok=True)
