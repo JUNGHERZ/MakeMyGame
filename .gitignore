@@ -1,0 +1,14 @@
+# Secrets – niemals ins Repo!
+.env
+
+# Gespeicherte Spiele (laufzeitdaten)
+shared_games/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Make My Game – Retro Games mit KI erstellen</title>
+  <meta name="description" content="Beschreibe deine Spielidee und eine KI generiert ein spielbares Gameboy-Retro-Game.">
+
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/assets/manifest.json">
+  <meta name="theme-color" content="#9bbc0f">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MakeMyGame">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Make My Game">
+  <meta property="og:description" content="Describe your game idea – AI builds a retro game for you.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://makemygame.app">
+  <meta property="og:image" content="/assets/icon-512.png">
+
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/gameboy.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+<div class="landing">
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <h1>🎮 GAMEBOY<br>GAME MAKER</h1>
+    <p class="subtitle" data-i18n="subtitle">DESCRIBE YOUR IDEA · AI BUILDS YOUR GAME</p>
+  </header>
+
+  <!-- ========== MAIN AREA ========== -->
+  <div class="main-area">
+
+    <!-- === INPUT PANEL (links) === -->
+    <div class="input-panel">
+      <div class="input-card">
+        <div class="card-header">
+          <h2 data-i18n="cardTitle">💡 YOUR GAME IDEA</h2>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="btn-help" id="btnHelp" data-i18n-title="helpTitle" title="Show controls">❓</button>
+            <!-- Sprach-Toggle -->
+            <button class="btn-lang" id="btnLang" data-i18n-title="langToggleTitle" title="Switch language">
+              <!-- DE-Flagge (schwarz-rot-gold) -->
+              <svg id="flagDE" class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+                <rect width="20" height="14" rx="2" fill="#000"/>
+                <rect y="4.67" width="20" height="4.66" fill="#D00"/>
+                <rect y="9.33" width="20" height="4.67" fill="#FFCE00"/>
+              </svg>
+              <!-- GB-Flagge (Union Jack) -->
+              <svg id="flagGB" class="flag-svg" viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg">
+                <rect width="20" height="14" rx="2" fill="#012169"/>
+                <path d="M0,0 L20,14 M20,0 L0,14" stroke="#fff" stroke-width="3"/>
+                <path d="M0,0 L20,14 M20,0 L0,14" stroke="#C8102E" stroke-width="1.8"/>
+                <path d="M10,0 V14 M0,7 H20" stroke="#fff" stroke-width="4"/>
+                <path d="M10,0 V14 M0,7 H20" stroke="#C8102E" stroke-width="2.4"/>
+              </svg>
+            </button>
+            <div class="theme-toggle" id="themeToggle" title="Dark/Light Mode">
+              <div class="theme-toggle-knob"></div>
+            </div>
+          </div>
+        </div>
+
+        <form id="ideaForm">
+          <textarea
+            id="ideaInput"
+            class="prompt-textarea"
+            data-i18n-placeholder="placeholder"
+            placeholder="Describe your game..."
+            maxlength="500"
+          ></textarea>
+
+          <!-- Genre Tags (Labels bleiben immer gleich) -->
+          <div class="genre-tags" id="genreTags">
+            <button type="button" class="genre-tag" data-genre="arcade">🕹 ARCADE</button>
+            <button type="button" class="genre-tag" data-genre="puzzle">🧩 PUZZLE</button>
+            <button type="button" class="genre-tag" data-genre="adventure">🗺 ADVENTURE</button>
+            <button type="button" class="genre-tag" data-genre="shooter">💥 SHOOTER</button>
+            <button type="button" class="genre-tag" data-genre="racing">🏎 RACING</button>
+            <button type="button" class="genre-tag" data-genre="sports">⚽ SPORTS</button>
+            <button type="button" class="genre-tag" data-genre="quiz">❓ QUIZ</button>
+          </div>
+
+          <!-- Generate Button -->
+          <button type="submit" class="btn-generate" id="btnGenerate" data-i18n="btnGenerate">
+            🚀 GENERATE GAME
+          </button>
+
+          <!-- Progress Bar -->
+          <div class="progress-wrap" id="progressWrap">
+            <div class="progress-track">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="progressLabel">0%</div>
+          </div>
+        </form>
+
+        <!-- Status -->
+        <div class="status-bar hidden" id="statusBar">
+          <div class="spinner" id="statusSpinner"></div>
+          <span class="status-text" id="statusText"></span>
+        </div>
+
+        <!-- Beispiele -->
+        <div class="examples">
+          <h3 data-i18n="examplesTitle">📝 EXAMPLES</h3>
+          <div class="examples-grid">
+            <div class="example-item" data-i18n-prompt="exSnakePrompt" data-i18n-label="exSnake">
+              🐍 Snake
+            </div>
+            <div class="example-item" data-i18n-prompt="exSpacePrompt" data-i18n-label="exSpace">
+              👾 Space Invaders
+            </div>
+            <div class="example-item" data-i18n-prompt="exBreakoutPrompt" data-i18n-label="exBreakout">
+              🧱 Breakout
+            </div>
+            <div class="example-item" data-i18n-prompt="exLabyrinthPrompt" data-i18n-label="exLabyrinth">
+              🏰 Labyrinth
+            </div>
+            <div class="example-item" data-i18n-prompt="exPongPrompt" data-i18n-label="exPong">
+              🏓 Pong vs CPU
+            </div>
+            <div class="example-item" data-i18n-prompt="exDinoPrompt" data-i18n-label="exDino">
+              🦖 Dino Runner
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings Toggle -->
+      <button class="btn-action" id="settingsToggle" style="margin-top: 14px; width: 100%;" data-i18n="btnSettings">
+        ⚙️ USE CUSTOM API KEYS
+      </button>
+
+      <!-- Settings Panel -->
+      <div class="input-card hidden" id="settingsPanel" style="margin-top: 10px;">
+        <div class="card-header">
+          <h2 data-i18n="settingsTitle">⚙️ CUSTOM API KEYS</h2>
+          <div class="theme-toggle" id="customKeysToggle" title="Toggle custom keys">
+            <div class="theme-toggle-knob custom-keys-knob"></div>
+          </div>
+        </div>
+        <p style="font-size: 9px; color: var(--text-muted); margin-bottom: 14px; line-height: 2.2;" data-i18n="settingsDesc">
+          Optional: Use your own API keys instead of the server configuration.
+        </p>
+        <div id="customKeysFields">
+          <div style="margin-top: 8px;">
+            <label style="font-size: 9px; color: var(--text-muted); display: block; margin-bottom: 6px;" data-i18n="labelApiUrl">API URL (OpenAI-compatible)</label>
+            <input type="url" id="apiUrl" class="prompt-textarea" style="height: auto; padding: 10px; font-size: 9px;" placeholder="https://api.openai.com/v1/chat/completions">
+          </div>
+          <div style="margin-top: 10px;">
+            <label style="font-size: 9px; color: var(--text-muted); display: block; margin-bottom: 6px;" data-i18n="labelApiKey">API KEY</label>
+            <input type="password" id="apiKey" class="prompt-textarea" style="height: auto; padding: 10px; font-size: 9px;" placeholder="sk-...">
+          </div>
+          <div style="margin-top: 10px;">
+            <label style="font-size: 9px; color: var(--text-muted); display: block; margin-bottom: 6px;" data-i18n="labelModel">MODEL</label>
+            <input type="text" id="apiModel" class="prompt-textarea" style="height: auto; padding: 10px; font-size: 9px;" placeholder="gpt-4o-mini" value="gpt-4o-mini">
+          </div>
+          <button type="button" class="btn-generate" id="btnSaveSettings" style="margin-top: 12px; font-size: 10px;" data-i18n="btnSave">
+            💾 SAVE
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- === GAMEBOY (rechts) === -->
+    <div>
+      <div class="gameboy-container">
+        <div class="gameboy">
+
+          <div class="screen-frame">
+            <div class="screen-label">
+              <span><span class="power-led"></span>GAME MAKER</span>
+            </div>
+            <div class="screen">
+              <canvas id="gameboyCanvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="controls">
+            <!-- D-Pad -->
+            <div class="dpad">
+              <div class="dpad-h"></div>
+              <div class="dpad-v"></div>
+              <button class="dpad-btn up"    data-btn="dpad-up"    aria-label="Up"></button>
+              <button class="dpad-btn down"  data-btn="dpad-down"  aria-label="Down"></button>
+              <button class="dpad-btn left"  data-btn="dpad-left"  aria-label="Left"></button>
+              <button class="dpad-btn right" data-btn="dpad-right" aria-label="Right"></button>
+              <div class="dpad-center"></div>
+            </div>
+
+            <!-- A/B -->
+            <div class="ab-buttons">
+              <div>
+                <button class="btn-ab btn-b" data-btn="btn-b">B</button>
+                <div class="btn-label">B</div>
+              </div>
+              <div>
+                <button class="btn-ab btn-a" data-btn="btn-a">A</button>
+                <div class="btn-label">A</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Start / Select -->
+          <div class="bottom-buttons">
+            <div>
+              <button class="btn-system" data-btn="btn-select" aria-label="Select"></button>
+              <div class="btn-system-label">SELECT</div>
+            </div>
+            <div>
+              <button class="btn-system" data-btn="btn-start" aria-label="Start"></button>
+              <div class="btn-system-label">START</div>
+            </div>
+          </div>
+
+          <div class="brand"><span>GAME BOY™</span></div>
+
+          <div class="speaker">
+            <div class="speaker-line"></div>
+            <div class="speaker-line"></div>
+            <div class="speaker-line"></div>
+            <div class="speaker-line"></div>
+            <div class="speaker-line"></div>
+            <div class="speaker-line"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Game Actions (unter dem Gameboy) -->
+      <div class="game-actions hidden" id="gameActions">
+        <button class="btn-action" id="btnShare"   data-i18n="btnShare">📋 SHARE</button>
+        <button class="btn-action" id="btnRemix"   data-i18n="btnRemix">🔄 REMIX</button>
+        <button class="btn-action" id="btnNewGame" data-i18n="btnNew">✨ NEW</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <p><span data-i18n="footerText">GAMEBOY GAME MAKER · POWERED BY AI · 2026 · </span><a href="https://www.jungherz.com/" target="_blank" rel="noopener noreferrer" style="color:#9bbc0f;text-decoration:none;">JUNGHERZ GMBH</a></p>
+  </footer>
+
+</div>
+
+<!-- ========== HILFE-MODAL ========== -->
+<div class="modal-overlay hidden" id="helpModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 data-i18n="helpModalTitle">🎮 CONTROLS</h2>
+      <button class="modal-close" id="helpModalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="help-section">
+        <h3 data-i18n="helpKeyboard">⌨️ KEYBOARD</h3>
+        <div class="help-grid">
+          <div class="help-row">
+            <span class="help-keys">↑ ↓ ← →</span>
+            <span class="help-desc" data-i18n="helpDpad">D-Pad</span>
+          </div>
+          <div class="help-row">
+            <span class="help-keys">W A S D</span>
+            <span class="help-desc" data-i18n="helpDpadAlt">D-Pad (alt)</span>
+          </div>
+          <div class="help-row">
+            <span class="help-keys">X &nbsp;J &nbsp;SPACE</span>
+            <span class="help-desc" data-i18n="helpABtn">A-Button</span>
+          </div>
+          <div class="help-row">
+            <span class="help-keys">Z &nbsp;Y &nbsp;K</span>
+            <span class="help-desc" data-i18n="helpBBtn">B-Button</span>
+          </div>
+          <div class="help-row">
+            <span class="help-keys">ENTER</span>
+            <span class="help-desc" data-i18n="helpStart">Start</span>
+          </div>
+          <div class="help-row">
+            <span class="help-keys">SHIFT</span>
+            <span class="help-desc" data-i18n="helpSelect">Select</span>
+          </div>
+        </div>
+      </div>
+      <div class="help-section">
+        <h3 data-i18n="helpTouch">👆 TOUCH / MOUSE</h3>
+        <p class="help-text" data-i18n-html="helpTouchText">All buttons on the Gameboy skin are clickable and touchable.</p>
+      </div>
+      <div class="help-section">
+        <h3 data-i18n="helpTips">💡 TIPS</h3>
+        <p class="help-text" data-i18n-html="helpTipsText">• Press <strong>A</strong> to start a game</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>

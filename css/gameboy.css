@@ -1,0 +1,385 @@
+/* ============================================
+   GAMEBOY SHELL – Wiederverwendbarer Skin
+   Optimiert für iPad und größere Displays
+   ============================================ */
+
+.gameboy-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameboy {
+  background: var(--shell-mid);
+  background: linear-gradient(145deg, var(--shell-light), var(--shell-dark));
+  width: 440px;
+  border-radius: 24px 24px 110px 24px;
+  padding: 28px;
+  box-shadow:
+    8px 8px 0px var(--shell-shadow),
+    inset 2px 2px 4px rgba(255,255,255,0.3),
+    inset -2px -2px 4px rgba(0,0,0,0.15);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.gameboy::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 34px;
+  right: 34px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #a09080, transparent);
+  border-radius: 2px;
+}
+
+/* === DISPLAY RAHMEN === */
+.screen-frame {
+  background: #6a6a7a;
+  background: linear-gradient(180deg, #5a5a6a, #7a7a8a);
+  border-radius: 14px;
+  padding: 22px 22px 14px 22px;
+  margin-bottom: 12px;
+  box-shadow:
+    inset 3px 3px 6px rgba(0,0,0,0.4),
+    inset -1px -1px 2px rgba(255,255,255,0.1);
+}
+
+.screen-label {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.screen-label span {
+  font-size: 8px;
+  color: #3a3a4a;
+  letter-spacing: 3px;
+}
+
+.power-led {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #444;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  transition: all 0.3s;
+}
+
+.power-led.on {
+  background: var(--accent-red);
+  box-shadow: 0 0 8px rgba(155, 27, 48, 0.6);
+}
+
+/* === BILDSCHIRM === */
+.screen {
+  background: var(--gb-lightest);
+  background: linear-gradient(180deg, #9bab3f, #7b8b1f);
+  border-radius: 6px;
+  width: 100%;
+  height: 340px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 4px 4px 8px rgba(0,0,0,0.25),
+    inset -2px -2px 4px rgba(255,255,255,0.1);
+  image-rendering: pixelated;
+}
+
+/* Canvas füllt den Screen exakt */
+.screen canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Overlay für generierte Spiele (iframe/HTML) */
+.screen .game-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+/* === STEUERUNG === */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 14px 12px 14px;
+}
+
+/* D-Pad */
+.dpad {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.dpad-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dpad-btn.up    { top: 0;   left: 50%; transform: translateX(-50%); width: 38px; height: 42px; }
+.dpad-btn.down  { bottom:0; left: 50%; transform: translateX(-50%); width: 38px; height: 42px; }
+.dpad-btn.left  { left: 0;  top: 50%;  transform: translateY(-50%); width: 42px; height: 38px; }
+.dpad-btn.right { right: 0; top: 50%;  transform: translateY(-50%); width: 42px; height: 38px; }
+
+.dpad-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: #3a3a3a;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.dpad-h, .dpad-v {
+  position: absolute;
+  background: #3a3a3a;
+  border-radius: 5px;
+  box-shadow:
+    inset 1px 1px 2px rgba(255,255,255,0.1),
+    2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.dpad-h {
+  width: 120px;
+  height: 38px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.dpad-v {
+  width: 38px;
+  height: 120px;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.dpad-btn:active + .dpad-h,
+.dpad-btn:active + .dpad-v {
+  filter: brightness(0.85);
+}
+
+/* A/B Buttons */
+.ab-buttons {
+  display: flex;
+  gap: 18px;
+  transform: rotate(-20deg);
+}
+
+.btn-ab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow:
+    3px 3px 0px var(--accent-dark),
+    inset 1px 1px 2px rgba(255,255,255,0.2);
+  transition: transform 0.05s, box-shadow 0.05s;
+  color: #ddd;
+  background: var(--accent-red);
+  background: linear-gradient(145deg, #ab2b40, #8b0b20);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-ab:active {
+  transform: translateY(2px);
+  box-shadow:
+    1px 1px 0px var(--accent-dark),
+    inset 1px 1px 2px rgba(255,255,255,0.2);
+}
+
+.btn-b { margin-top: 24px; }
+
+.btn-label {
+  font-size: 8px;
+  color: #6a6a7a;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Start/Select */
+.bottom-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.btn-system {
+  width: 52px;
+  height: 16px;
+  background: var(--shell-shadow);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow:
+    inset 2px 2px 3px rgba(0,0,0,0.3),
+    1px 1px 2px rgba(0,0,0,0.2);
+  transition: transform 0.05s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-system:active {
+  transform: scale(0.95);
+}
+
+.btn-system-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #6a6a7a;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Speaker */
+.speaker {
+  position: absolute;
+  bottom: 52px;
+  right: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transform: rotate(-30deg);
+}
+
+.speaker-line {
+  width: 34px;
+  height: 3px;
+  background: #a09080;
+  border-radius: 2px;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Brand */
+.brand {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: -4px;
+}
+
+.brand span {
+  font-size: 9px;
+  color: #4a4a5a;
+  letter-spacing: 5px;
+}
+
+/* === RESPONSIVE === */
+
+/* iPad / Tablets im Landscape */
+@media (min-width: 1024px) {
+  .gameboy {
+    width: 480px;
+    padding: 30px;
+  }
+
+  .screen {
+    height: 370px;
+  }
+
+  .dpad {
+    width: 130px;
+    height: 130px;
+  }
+
+  .dpad-h {
+    width: 130px;
+    height: 42px;
+  }
+
+  .dpad-v {
+    width: 42px;
+    height: 130px;
+  }
+
+  .dpad-btn.up, .dpad-btn.down   { width: 42px; height: 46px; }
+  .dpad-btn.left, .dpad-btn.right { width: 46px; height: 42px; }
+
+  .btn-ab {
+    width: 62px;
+    height: 62px;
+    font-size: 14px;
+  }
+
+  .btn-system {
+    width: 56px;
+    height: 18px;
+  }
+}
+
+/* Kleine Phones */
+@media (max-width: 480px) {
+  .gameboy {
+    width: 340px;
+    padding: 20px;
+    border-radius: 18px 18px 80px 18px;
+  }
+
+  .screen {
+    height: 270px;
+  }
+
+  .screen-frame {
+    padding: 16px 16px 10px 16px;
+  }
+
+  .dpad {
+    width: 100px;
+    height: 100px;
+  }
+
+  .dpad-h {
+    width: 100px;
+    height: 32px;
+  }
+
+  .dpad-v {
+    width: 32px;
+    height: 100px;
+  }
+
+  .dpad-btn.up, .dpad-btn.down   { width: 32px; height: 34px; }
+  .dpad-btn.left, .dpad-btn.right { width: 34px; height: 32px; }
+
+  .btn-ab {
+    width: 46px;
+    height: 46px;
+    font-size: 11px;
+  }
+
+  .controls {
+    padding: 12px 8px 8px 8px;
+  }
+
+  .btn-system {
+    width: 42px;
+    height: 13px;
+  }
+
+  .brand span {
+    font-size: 7px;
+  }
+}

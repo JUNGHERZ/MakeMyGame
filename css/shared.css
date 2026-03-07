@@ -1,0 +1,254 @@
+/* ============================================
+   SHARED STYLES – Gameboy Game Maker
+   Retro-Theme, Fonts, Grundfarben
+   Dark/Light Mode Support
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* === DARK MODE (Default) === */
+:root {
+  /* Gameboy Original-Palette (4 Farben) */
+  --gb-lightest: #9bab3f;
+  --gb-light:    #7b8b1f;
+  --gb-dark:     #3a5a1a;
+  --gb-darkest:  #1a2a00;
+
+  /* Gehäuse */
+  --shell-light: #d4c8b8;
+  --shell-mid:   #c0b0a0;
+  --shell-dark:  #b0a090;
+  --shell-shadow:#8a7a6a;
+
+  /* Akzent */
+  --accent-red:  #9b1b30;
+  --accent-dark: #5a1020;
+
+  /* UI – Dark */
+  --bg-dark:     #1a1a2e;
+  --bg-mid:      #2c2c2c;
+  --bg-card:     rgba(255,255,255,0.04);
+  --bg-card-border: rgba(255,255,255,0.08);
+  --bg-input:    rgba(0,0,0,0.3);
+  --bg-input-border: rgba(255,255,255,0.1);
+  --bg-tag:      rgba(255,255,255,0.06);
+  --bg-tag-border: rgba(255,255,255,0.1);
+  --bg-example:  rgba(155, 171, 63, 0.05);
+  --bg-example-border: rgba(155, 171, 63, 0.1);
+  --bg-action:   rgba(255,255,255,0.06);
+  --bg-action-border: rgba(255,255,255,0.12);
+  --text-light:  #e0e0e0;
+  --text-muted:  #8a8a9a;
+  --text-example: rgba(155, 171, 63, 0.6);
+  --glow-header: rgba(155, 27, 48, 0.08);
+}
+
+/* === LIGHT MODE === */
+[data-theme="light"] {
+  --bg-dark:     #e8e4de;
+  --bg-mid:      #d8d4ce;
+  --bg-card:     rgba(255,255,255,0.7);
+  --bg-card-border: rgba(0,0,0,0.1);
+  --bg-input:    rgba(255,255,255,0.8);
+  --bg-input-border: rgba(0,0,0,0.15);
+  --bg-tag:      rgba(0,0,0,0.05);
+  --bg-tag-border: rgba(0,0,0,0.12);
+  --bg-example:  rgba(60, 80, 20, 0.08);
+  --bg-example-border: rgba(60, 80, 20, 0.15);
+  --bg-action:   rgba(0,0,0,0.05);
+  --bg-action-border: rgba(0,0,0,0.12);
+  --text-light:  #2a2a2a;
+  --text-muted:  #6a6a7a;
+  --text-example: #4a5a2a;
+  --glow-header: rgba(155, 27, 48, 0.05);
+
+  /* Gameboy-Gehäuse etwas heller */
+  --shell-light: #e0d8cc;
+  --shell-mid:   #d0c4b4;
+  --shell-dark:  #c0b4a4;
+  --shell-shadow:#a09484;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+  line-height: 2;
+}
+
+/* Globale Zeilenhöhe für alle UI-Texte */
+p, label, input, textarea, .status-text, .help-text, .btn-action, .btn-generate {
+  line-height: 2;
+}
+
+/* Einstellbereich – etwas mehr Luft */
+.input-card p,
+.input-card label {
+  line-height: 2.2;
+  margin-bottom: 4px;
+}
+
+/* Prevent text selection on interactive elements */
+button, .no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
+/* ============================================
+   THEME TOGGLE SWITCH
+   ============================================ */
+
+.theme-toggle {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-7px);
+}
+
+[data-theme="light"] .theme-toggle {
+  background: rgba(0,0,0,0.1);
+  border-color: rgba(0,0,0,0.15);
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2a2a4a;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.theme-toggle-knob::after {
+  content: '🌙';
+  font-size: 11px;
+}
+
+[data-theme="light"] .theme-toggle-knob {
+  left: 25px;
+  background: #f5c842;
+}
+
+[data-theme="light"] .theme-toggle-knob::after {
+  content: '☀️';
+}
+
+/* Custom Keys Toggle – nutzt gleiche Basis, anderes Icon */
+.custom-keys-knob::after {
+  content: '❌' !important;
+  font-size: 8px !important;
+}
+
+.custom-keys-knob.active::after {
+  content: '✅' !important;
+  font-size: 8px !important;
+}
+
+.custom-keys-knob.active {
+  left: 25px !important;
+  background: #2a8a4a !important;
+}
+
+/* === FOOTER === */
+.site-footer {
+  text-align: center;
+  padding: 24px 16px 32px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--text-muted, #666);
+  opacity: 0.6;
+  letter-spacing: 0.03em;
+}
+
+.site-footer a {
+  color: #9bbc0f;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.site-footer a:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* === SPRACH-TOGGLE === */
+.btn-lang {
+  width: 34px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  transform: translateY(-7px);
+  padding: 3px;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.btn-lang:hover {
+  border-color: rgba(155, 188, 15, 0.6);
+  transform: translateY(-7px) scale(1.08);
+  box-shadow: 0 0 6px rgba(155,188,15,0.25);
+}
+
+[data-theme="light"] .btn-lang {
+  border-color: rgba(0,0,0,0.2);
+  background: transparent;
+}
+
+/* SVG-Flaggen im Button */
+.flag-svg {
+  width: 24px;
+  height: 17px;
+  border-radius: 2px;
+  display: none;
+  flex-shrink: 0;
+}
+
+.flag-svg.active {
+  display: block;
+}

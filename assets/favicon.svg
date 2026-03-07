@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Hintergrund -->
+  <rect width="512" height="512" rx="80" ry="80" fill="#1a1a2e"/>
+
+  <!-- LCD-Screen (Gameboy-Grün, leicht abgerundet) -->
+  <rect x="96" y="96" width="320" height="240" rx="16" ry="16" fill="#0f380f"/>
+
+  <!-- Screen-Innenrahmen (heller Rand) -->
+  <rect x="112" y="112" width="288" height="208" rx="8" ry="8" fill="#306230"/>
+
+  <!-- Pixel-Buchstabe "G" aus Blöcken -->
+  <!-- Zeile 1 -->
+  <rect x="176" y="160" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="216" y="160" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="256" y="160" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="296" y="160" width="40" height="40" fill="#9bbc0f"/>
+  <!-- Zeile 2 -->
+  <rect x="176" y="200" width="40" height="40" fill="#9bbc0f"/>
+  <!-- Zeile 3 -->
+  <rect x="176" y="240" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="216" y="240" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="256" y="240" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="296" y="240" width="40" height="40" fill="#9bbc0f"/>
+  <!-- Zeile 4 -->
+  <rect x="176" y="280" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="296" y="280" width="40" height="40" fill="#9bbc0f"/>
+  <!-- Zeile 5 -->
+  <rect x="176" y="320" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="216" y="320" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="256" y="320" width="40" height="40" fill="#9bbc0f"/>
+  <rect x="296" y="320" width="40" height="40" fill="#9bbc0f"/>
+</svg>
