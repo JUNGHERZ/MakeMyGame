@@ -9,6 +9,8 @@
 
 **MakeMyGame** ist eine Web-App, bei der du eine Spielidee in natürlicher Sprache eingibst und eine KI daraus ein spielbares Spiel generiert – im klassischen Gameboy-Look (grüner LCD-Screen, 4-Farben-Palette, 160×144px).
 
+![MakeMyGame Demo](assets/makemygame_intro.gif)
+
 ---
 
 ## ✨ Features
