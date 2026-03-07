@@ -1,5 +1,10 @@
 # 🎮 MakeMyGame
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-makemygame.app-9bbc0f?style=flat-square&logo=googlechrome&logoColor=white)](https://makemygame.app)
+[![MIT License](https://img.shields.io/badge/License-MIT-9bbc0f?style=flat-square)](https://github.com/JUNGHERZ/MakeMyGame/blob/main/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/JUNGHERZ/MakeMyGame?style=flat-square&color=9bbc0f)](https://github.com/JUNGHERZ/MakeMyGame/stargazers)
+[![Python](https://img.shields.io/badge/Python-3.12-9bbc0f?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+
 > Beschreibe eine Spielidee – die KI baut es dir als spielbares Retro-Game im Gameboy-Stil.
 
 **MakeMyGame** ist eine Web-App, bei der du eine Spielidee in natürlicher Sprache eingibst und eine KI daraus ein spielbares Spiel generiert – im klassischen Gameboy-Look (grüner LCD-Screen, 4-Farben-Palette, 160×144px).
