@@ -30,6 +30,8 @@
 ```
 gameboy-maker/
 ├── .env                    ← API_URL, API_KEY, API_MODEL (nicht im Repo)
+├── Dockerfile              ← Container-Build (python:3.12-slim)
+├── requirements.txt        ← Python-Dependencies
 ├── server.py               ← aiohttp Server (Static Files + API)
 ├── index.html              ← Landing Page
 ├── css/
@@ -57,11 +59,15 @@ gameboy-maker/
 
 ## 🛠️ Setup & Start
 
-### Voraussetzungen
-- Python 3.10+
-- `aiohttp` installiert (`pip install aiohttp python-dotenv`)
+### Lokal (Python)
 
-### `.env` anlegen
+**Voraussetzungen:** Python 3.10+
+
+```bash
+pip install -r requirements.txt
+```
+
+`.env` anlegen:
 
 ```env
 API_URL=https://router.eu.requesty.ai/v1/chat/completions
@@ -69,13 +75,27 @@ API_KEY=dein-api-key
 API_MODEL=anthropic/claude-sonnet-4-6
 ```
 
-### Server starten
+Server starten:
 
 ```bash
 python3 server.py
 ```
 
 Die App läuft dann auf `http://localhost:8777`.
+
+### Docker
+
+```bash
+docker build -t makemygame .
+docker run -p 8777:8777 --env-file .env makemygame
+```
+
+### EasyPanel
+
+- Build-Methode: **Dockerfile**
+- Port: `8777`
+- Umgebungsvariablen: `API_URL`, `API_KEY`, `API_MODEL` in EasyPanel hinterlegen
+- Volume: `shared_games/` als persistentes Volume mounten
 
 ---
 
