@@ -21,7 +21,7 @@
 
 ## 🚀 Demo
 
-**[ot.fcjb8a.easypanel.host:8777](http://ot.fcjb8a.easypanel.host:8777)**
+**[makemygame.app](https://makemygame.app)**
 
 ---
 
