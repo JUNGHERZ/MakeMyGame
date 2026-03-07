@@ -9,7 +9,9 @@
 
 **MakeMyGame** ist eine Web-App, bei der du eine Spielidee in natürlicher Sprache eingibst und eine KI daraus ein spielbares Spiel generiert – im klassischen Gameboy-Look (grüner LCD-Screen, 4-Farben-Palette, 160×144px).
 
-![MakeMyGame Demo](assets/makemygame_intro.gif)
+<div align="center">
+  <img src="assets/makemygame_intro.gif" alt="MakeMyGame Demo" />
+</div>
 
 ---
 
@@ -21,6 +23,7 @@
 - ⌨️ **Keyboard & Touch** – D-Pad, A/B, Start, Select (Tastatur + Touch-Buttons)
 - 🔀 **Remix-Modus** – bestehende Spiele durch KI gezielt verändern lassen
 - 🔗 **Share-System** – Spiele speichern & per Kurz-URL teilen
+- 🌍 **Mehrsprachigkeit** – UI automatisch auf Deutsch oder Englisch je nach Browser-Sprache
 - 🌙 **Dark/Light Mode** – Toggle mit localStorage-Speicherung
 - 🔑 **Flexibles API-System** – Server-Keys (Default) oder eigene API-Keys
 
