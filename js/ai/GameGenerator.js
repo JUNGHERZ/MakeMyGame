@@ -83,8 +83,7 @@ export class GameGenerator {
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: userPrompt }
       ],
-      temperature: 0.7,
-      max_completion_tokens: 4096
+      temperature: 0.7
     };
 
     try {

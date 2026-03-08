@@ -4,7 +4,7 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-9bbc0f?style=flat-square)](https://github.com/JUNGHERZ/MakeMyGame/blob/main/LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/JUNGHERZ/MakeMyGame?style=flat-square&color=9bbc0f)](https://github.com/JUNGHERZ/MakeMyGame/stargazers)
 [![Python](https://img.shields.io/badge/Python-3.12-9bbc0f?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
-[![Changelog](https://img.shields.io/badge/Changelog-v1.0.0-9bbc0f?style=flat-square)](https://github.com/JUNGHERZ/MakeMyGame/blob/main/CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/Changelog-v1.0.1-9bbc0f?style=flat-square)](https://github.com/JUNGHERZ/MakeMyGame/blob/main/CHANGELOG.md)
 
 > Beschreibe eine Spielidee – die KI baut es dir als spielbares Retro-Game im Gameboy-Stil.
 

@@ -5,6 +5,13 @@ Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/).
 
 ---
 
+## [1.0.1] – 2026-03-07
+
+### Fixed
+- Token-Limit (`max_completion_tokens: 4096`) entfernt – komplexe Spiele wurden abgeschnitten und führten zu „Code-Parsing fehlgeschlagen"-Fehlern
+
+---
+
 ## [1.0.0] – 2026-03-07 🎉 Initial Release
 
 ### Added
