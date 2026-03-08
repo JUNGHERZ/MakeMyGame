@@ -83,6 +83,7 @@ pip install -r requirements.txt
 API_URL=https://router.eu.requesty.ai/v1/chat/completions
 API_KEY=dein-api-key
 API_MODEL=anthropic/claude-sonnet-4-6
+PORT=8777
 ```
 
 Server starten:
