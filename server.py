@@ -216,8 +216,35 @@ def create_app():
     return app
 
 if __name__ == '__main__':
-    keys_status = 'Server-Keys geladen' if has_server_keys() else 'Keine Server-Keys (.env)'
-    print(f'Gameboy Game Maker Server startet auf Port {PORT}...')
-    print(f'   {keys_status}')
+    # ANSI Farben
+    GREEN  = '\033[38;2;155;188;15m'   # Gameboy-Grün #9bbc0f
+    DARK   = '\033[38;2;48;98;48m'     # Gameboy-Dunkel
+    DIM    = '\033[2m'
+    RESET  = '\033[0m'
+    BOLD   = '\033[1m'
+
+    ascii_logo = f"""
+{GREEN}  ███╗   ███╗ █████╗ ██╗  ██╗███████╗{RESET}
+{GREEN}  ████╗ ████║██╔══██╗██║ ██╔╝██╔════╝{RESET}
+{GREEN}  ██╔████╔██║███████║█████╔╝ █████╗  {RESET}
+{GREEN}  ██║╚██╔╝██║██╔══██║██╔═██╗ ██╔══╝  {RESET}
+{GREEN}  ██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗{RESET}
+{GREEN}  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝{RESET}
+{DARK}  ███╗   ███╗██╗   ██╗{RESET}{GREEN} ██████╗  █████╗ ███╗   ███╗███████╗{RESET}
+{DARK}  ████╗ ████║╚██╗ ██╔╝{RESET}{GREEN} ██╔════╝██╔══██╗████╗ ████║██╔════╝{RESET}
+{DARK}  ██╔████╔██║ ╚████╔╝ {RESET}{GREEN} ██║     ███████║██╔████╔██║█████╗  {RESET}
+{DARK}  ██║╚██╔╝██║  ╚██╔╝  {RESET}{GREEN} ██║     ██╔══██║██║╚██╔╝██║██╔══╝  {RESET}
+{DARK}  ██║ ╚═╝ ██║   ██║   {RESET}{GREEN} ╚██████╗██║  ██║██║ ╚═╝ ██║███████╗{RESET}
+{DARK}  ╚═╝     ╚═╝   ╚═╝   {RESET}{GREEN}  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝{RESET}
+"""
+
+    keys_status  = f"{GREEN}✔ Server-Keys geladen{RESET}" if has_server_keys() else f"\033[33m⚠ Keine Server-Keys (.env){RESET}"
+    print(ascii_logo)
+    print(f"  {BOLD}🎮 MakeMyGame Server{RESET}  {DIM}v1.0.0{RESET}")
+    print(f"  {DIM}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{RESET}")
+    print(f"  🌐 http://0.0.0.0:{PORT}")
+    print(f"  {keys_status}")
+    print(f"  {DIM}Model: {SERVER_API_MODEL}{RESET}")
+    print(f"  {DIM}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{RESET}\n")
     app = create_app()
-    web.run_app(app, host='0.0.0.0', port=PORT, print=lambda msg: print(f'   {msg}'))
+    web.run_app(app, host='0.0.0.0', port=PORT, print=lambda msg: print(f'  {DIM}{msg}{RESET}'))
