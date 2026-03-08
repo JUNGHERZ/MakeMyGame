@@ -240,7 +240,7 @@ if __name__ == '__main__':
 
     keys_status  = f"{GREEN}✔ Server-Keys geladen{RESET}" if has_server_keys() else f"\033[33m⚠ Keine Server-Keys (.env){RESET}"
     print(ascii_logo)
-    print(f"  {BOLD}🎮 MakeMyGame Server{RESET}  {DIM}v1.0.0{RESET}")
+    print(f"  {BOLD}🎮 MakeMyGame Server{RESET}  {DIM}v1.0.1{RESET}")
     print(f"  {DIM}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━{RESET}")
     print(f"  🌐 http://0.0.0.0:{PORT}")
     print(f"  {keys_status}")
